@@ -1,0 +1,44 @@
+{
+  "token":{
+    "deployedAddress":"",
+    "walletAddress":"",
+    "walletPrivateKey":""
+  },
+  "contract":{
+    "deployedAddress":"",
+    "walletAddress":"",
+    "walletPrivateKey":""
+  },
+  "validators": {
+    "lowBugBounty": {
+      "privateKey": "",
+      "addresses": [""]
+    },
+    "mediumBugBounty": {
+      "privateKey": "",
+      "addresses": [
+        ""
+      ]
+    },
+    "highBugBounty": {
+      "privateKey": "",
+      "addresses": [
+        ""
+      
+      ]
+    },
+    "contractDeployment": {
+      "privateKey": "",
+      "addresses": [
+        ""
+      ]
+    },
+    "dappUsers": {
+      "privateKey": "",
+      "addresses": [
+        ""
+      ],
+      "uptimeStatus": [true, false]
+    }
+  }
+}
