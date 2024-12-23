@@ -1,44 +1,35 @@
 {
   "token":{
-    "deployedAddress":"",
-    "walletAddress":"",
-    "walletPrivateKey":""
+    "deployedAddress":"0x57a80760aeBe6737fd011FE3538b2fE37F5544d7",
+    "walletAddress":"0x140998Ab60F105eb37eE8925e8e26186A60185aD",
+    "walletPrivateKey":"20668f559508f6428e78e9ecef8d6fd798c30aebdeb6a407e876ee93dd8af45b"
   },
   "contract":{
-    "deployedAddress":"",
-    "walletAddress":"",
-    "walletPrivateKey":""
+    "deployedAddress":"0x35a74CC08AdaDe634445Cce665bAab16338A3Dc8",
+    "walletAddress":"0xAeBbcbee2736786Af9Fc47A7cCC5CC3BF2caD673",
+    "walletPrivateKey":"e0cc6f419102b92b6e1230a8d47cbb13ec43ae8349158b2aed2cbfad1c730027"
   },
   "validators": {
     "lowBugBounty": {
-      "privateKey": "",
-      "addresses": [""]
+      "privateKeys": ["334f80a48d3208ea38f9a4ca90770d6d050cb067a961f5f771c697a19105d782","69104572f04936ce87d47e07460a24ec35128b0069aa3c319ea5239db18284f6","afaf6acadf78f0abc9504c70d25bee5071929311e6708cdccc4158ba40bf5a19"],
+      "addresses": ["0x1daC81A62C9f6E681025D4b1Ea559D9510C442e0", "0xDd4cf3B0A48e92842E73aA017f4eb7059259ed2F", "0xE776e53D03fcfD548695F1d4388533061a7ecb11"]
     },
     "mediumBugBounty": {
-      "privateKey": "",
-      "addresses": [
-        ""
-      ]
+      "privateKeys": ["d8b65672ea91720fbb62ef986d02f19683ac886e0d067b718a2f0a073117972d","3388dce650f07eab8810119384633c7b81214542879c7ca64850e85252fe5645","96c5bc2310bfcd08efbc65fe5ab1cd9a3d86bf9362f0e2e8c6323241523a0ca1"],
+      "addresses": ["0x6D806495f085643C69Bf3697B17E580BC86Cd0E1","0x3fb421365c1d9599F264fDa86008A50d9174b305","0x638549e8613A89159Ad4067A4197DDc1AF906d2E"]
     },
     "highBugBounty": {
-      "privateKey": "",
-      "addresses": [
-        ""
-      
-      ]
+      "privateKeys": ["7cfeed7e007b0b9b7f7973eadf6564e25c021a06d73d867da277f22d4b5ee078","59a5d647206b470d1394779b8ed04f1e487cf6db83dccef065cb8262a3c48654","67d07f6714f7451643f19bf27590946d0309b799a4c1fb73ef3ec3722a2ae0ba"],
+      "addresses": ["0xDd3DecF2C47eCaFD7e0810DCe816cB85a3b2a8CF","0x4B6289Eb7d87bF81BE338c4656a53083CAf66D2b","0xe45941c4D2Aa98fbB7fbbdf675121e1f27Bc608f"]
     },
     "contractDeployment": {
-      "privateKey": "",
-      "addresses": [
-        ""
-      ]
+      "privateKeys": ["14038665f87970005148cbd7d491f85c1a22daccbdc113d3f026142395581f75","bda5bfafd42eca4428a05f9877ab83651a817faf8b05d4403b20fab358db388b","2961f61d3c41a13c6d49e7de2aea2b84828ed3910c73e20b21fcf55e81415a3f"],
+      "addresses": ["0xf8906f230E1f054390a70263910FAb2B95bcA9Cb","0x165aFb3bf2ea12c6383605a17B17c189ef5ECd9e","0xC8518513e98A7f72b80B9C1D4c28543d3728126d"]
     },
     "dappUsers": {
-      "privateKey": "",
-      "addresses": [
-        ""
-      ],
-      "uptimeStatus": [true, false]
+      "privateKeys": ["7597fef29a6b03f8ae63776b54aec2c3da3bcb246a50df2bc9620bf6204a0be2","b6072dec71daee070136030393206ae778c9dce9878eec35f25bff3220f4c0f5","d5f2eb02ef5ced35620b62cc7c46f507e524b982ec365fbad6143463df340c87"],
+      "addresses": ["0x528Fc06697B08ae2eeDdC7664e6327A5525607F6","0xeFd423f3874E4dE5Be91804A68A9418f279D378C","0xA6b2ff45E5Fc491381A16643d307f9a936fE404e"],
+      "uptimeStatus": [true, false, true]
     }
   }
 }
