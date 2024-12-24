@@ -5,11 +5,6 @@
 				"internalType": "address",
 				"name": "_tokenAddress",
 				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_initialAddress",
-				"type": "address"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -109,7 +104,7 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "rewardPerUser",
+				"name": "amount",
 				"type": "uint256"
 			}
 		],
@@ -210,9 +205,9 @@
 			},
 			{
 				"indexed": false,
-				"internalType": "bool",
-				"name": "status",
-				"type": "bool"
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
 			}
 		],
 		"name": "WhitelistUpdated",
@@ -373,6 +368,11 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"name": "bugBountyCriticality",
@@ -426,19 +426,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "claimDappRewards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "claimPerContractDeployer",
 		"outputs": [
@@ -473,6 +460,11 @@
 			},
 			{
 				"internalType": "bool",
+				"name": "_dappUserClaim",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
 				"name": "_bugBountyClaim",
 				"type": "bool"
 			}
@@ -480,6 +472,38 @@
 		"name": "claimReward",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "contractDeployerCurrentId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "contractDeploymentRegistrationTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -522,6 +546,25 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "getCurrentDeploymentMultiplier",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "getWhitelistedContractDeploymentUsers",
 		"outputs": [
@@ -542,30 +585,6 @@
 				"internalType": "address[]",
 				"name": "",
 				"type": "address[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "hasClaimedForID",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -604,6 +623,19 @@
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "highBugBountyCurrentId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -717,9 +749,14 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
-		"name": "isWhitelistedContractDeploymentUsers",
+		"name": "isWhitelistedContractDeploymentUsersForId",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -781,7 +818,58 @@
 				"type": "address"
 			}
 		],
+		"name": "iswhitelistedContractDeploymentUsers",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "iswhitelistedDappRewardUsers",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
 		"name": "lastContractDeploymentClaim",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "lowBugBountyCurrentId",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -814,6 +902,19 @@
 	{
 		"inputs": [],
 		"name": "lowRewardPerUser",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "mediumBugBountyCurrentId",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1047,6 +1148,45 @@
 	{
 		"inputs": [],
 		"name": "totalDappRewardsIds",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalHighBugBountyUserNumber",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalLowBugBountyUserNumber",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalMediumBugBountyUserNumber",
 		"outputs": [
 			{
 				"internalType": "uint256",

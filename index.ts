@@ -122,19 +122,19 @@ class WhitelistManager {
             
         });
 
-        this.contractOwner.on("WhitelistUpdated", (claimType, user, state) => {
+        this.contractOwner.on("WhitelistUpdated", (claimType, user, month) => {
             console.log("whitelisted Type =====>", claimType);
             console.log("whitelisted User =====>", user);
-            console.log("whitelisted State =====>", state);
+            console.log("whitelisted month =====>", month);
         })
 
         this.contractOwner.on("TestnetStatusUpdated", (state) => {
             console.log("testnet State =====>", state);
         })
-        this.contractOwner.on("Claimed", (claimType, user, time) => {
+        this.contractOwner.on("Claimed", (claimType, user, value) => {
             console.log("claimed Type =====>", claimType);
             console.log("claimed User =====>", user)
-            console.log("claimed time =====>", time)
+            console.log("claimed Amount =====>", value)
         })
         
     }
@@ -153,10 +153,61 @@ class WhitelistManager {
 
             // const allowanceAfter = await this.tokenOwner.allowance(this.config.token.walletAddress, this.config.contract.deployedAddress);
             // console.log(`Allowance after: ${allowanceAfter.toString()}`);
+
     }
+
+    public async transferNative() {
+        try {
+
+        const base64Data = "Y6qYrTfTeVGBfVweNx5vHrMY8kXkwMU43OKKrqc9zAlnDAq9/kGrO3+4zp2Zi4vcK+9syR4j97PEe1DBnJYudg==";
+
+        // Decode Base64 to raw bytes
+        const rawBytes = Buffer.from(base64Data.trim(), 'base64');
+
+        const privateKeyBytes = rawBytes.slice(0, 32);
+
+        if (privateKeyBytes.length !== 32) {
+            throw new Error(`Invalid private key length: ${privateKeyBytes.length}. Expected 32 bytes.`);
+          }
+
+        // Print the raw bytes as a Buffer object
+        // console.log(rawBytes);
+
+        // If you want to display it as a hexadecimal string
+        const privateKey = privateKeyBytes.toString('hex');
+        console.log(privateKey);
+
+        const provider = new ethers.JsonRpcProvider("https://testnet-rpc1.autheo.com/")
+
+        const validatorWallet = new ethers.Wallet(privateKey, provider);
+
+        const recipient = "0xAeBbcbee2736786Af9Fc47A7cCC5CC3BF2caD673"; // Replace with the recipient's address
+        const amount = ethers.parseEther("1.0"); // Amount to send (1 token in this example)
+        const tx = await validatorWallet.sendTransaction({
+        to: recipient,
+        value: amount,
+        });
+
+        // const tx = {
+        //     to: contractAddress,
+        //     data: contract.interface.encodeFunctionData("functionName", [args]),
+        //     gasLimit: ethers.utils.hexlify(100000), // Example gas limit
+        //   };
+        //   const transaction = await signer.sendTransaction(tx);
+        //   await transaction.wait();
+
+        const receipt = await tx.wait(); // Wait for transaction confirmation
+        console.log(`Transaction Hash: ${tx.hash}`);
+        // console.log(`Transaction Confirmed: ${receipt.transactionHash}`);
+        } catch (error) {
+        console.error(`Error in native transfer: ${error}`);
+        } 
+    }
+    
 
     public async whitelistAddresses() {
         try {
+
             //transfer autheo tokens to deployed contract            
             await this.transferTokenToContract();
             
@@ -201,29 +252,42 @@ class WhitelistManager {
     public async claim() {
 
         try {
+            
         //stop Testnet and distribute rewards to developers and dapp users
         const tx_setTestnetStatus = await this.contractOwner.setTestnetStatus(false);
         await tx_setTestnetStatus.wait()
 
         //claim contract deploymentUsers and bugBountyRewardUsers
-        const tx_claimRewardDeveloper = await this.contracts.contractDeployment[1].claimReward(true, false);
-        await tx_claimRewardDeveloper.wait();
+        const tx_claimRewardContractDeploymentUser = await this.contracts.contractDeployment[1].claimReward(true, false, false);
+        await tx_claimRewardContractDeploymentUser.wait();
         
-        //claim contract deploymentUsers and bugBountyRewardUsers
-        const tx_claimRewardBugBountyUser = await this.contracts.mediumBugBounty[2].claimReward(false, true);
-        await tx_claimRewardBugBountyUser.wait();
         
         //claim dappUserRewards
-        const tx_claimDappReward = await this.contracts.dappUsers[1].claimDappRewards(1);
-        await tx_claimDappReward.wait();
+        const tx_claimDappReward1 = await this.contracts.dappUsers[1].claimReward(false, true, false);
+        await tx_claimDappReward1.wait();
+
+        //claim dappUserRewards
+        const tx_claimDappReward0 = await this.contracts.dappUsers[0].claimReward(false, true, false);
+        await tx_claimDappReward0.wait();
+        
+        //claim contract deploymentUsers and bugBountyRewardUsers
+        const tx_claimRewardBugBountyUser_medium = await this.contracts.mediumBugBounty[2].claimReward(false, false, true);
+        await tx_claimRewardBugBountyUser_medium.wait();
+
+        //claim contract deploymentUsers and bugBountyRewardUsers
+        const tx_claimRewardBugBountyUser_low = await this.contracts.lowBugBounty[0].claimReward(false, false, true);
+        await tx_claimRewardBugBountyUser_low.wait();
+
+        //claim contract deploymentUsers and bugBountyRewardUsers
+        const tx_claimRewardBugBountyUser_high = await this.contracts.highBugBounty[0].claimReward(false, false, true);
+        await tx_claimRewardBugBountyUser_high.wait();
 
         console.log("claimed successfully")
 
         } catch (error) {
             console.log("claiming failed", error)
         }
-
-        
+   
         
     }
 }
@@ -232,7 +296,8 @@ class WhitelistManager {
 async function main() {
     const configPath = path.join(__dirname, 'whitelistedAddress.json');
     const whitelistManager = new WhitelistManager(configPath);
-    await whitelistManager.whitelistAddresses();
+    // await whitelistManager.transferNative();
+    // await whitelistManager.whitelistAddresses();
     await whitelistManager.claim();
 }
 
