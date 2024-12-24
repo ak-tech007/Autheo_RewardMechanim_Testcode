@@ -5,18 +5,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node index.ts",
-    "build":"tsc"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-    "dependencies": {
-      "dotenv": "^16.4.5",
-      "ethers": "^6.13.4"
-   },
-   "devDependencies": {
-      "ts-node": "^10.9.2",
-      "typescript": "^5.7.2"
-   }
+  "dependencies": {
+    "@cosmjs/encoding": "^0.32.4",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.4"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
 }

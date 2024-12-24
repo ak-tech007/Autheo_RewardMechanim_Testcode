@@ -155,54 +155,6 @@ class WhitelistManager {
             // console.log(`Allowance after: ${allowanceAfter.toString()}`);
 
     }
-
-    public async transferNative() {
-        try {
-
-        const base64Data = "Y6qYrTfTeVGBfVweNx5vHrMY8kXkwMU43OKKrqc9zAlnDAq9/kGrO3+4zp2Zi4vcK+9syR4j97PEe1DBnJYudg==";
-
-        // Decode Base64 to raw bytes
-        const rawBytes = Buffer.from(base64Data.trim(), 'base64');
-
-        const privateKeyBytes = rawBytes.slice(0, 32);
-
-        if (privateKeyBytes.length !== 32) {
-            throw new Error(`Invalid private key length: ${privateKeyBytes.length}. Expected 32 bytes.`);
-          }
-
-        // Print the raw bytes as a Buffer object
-        // console.log(rawBytes);
-
-        // If you want to display it as a hexadecimal string
-        const privateKey = privateKeyBytes.toString('hex');
-        console.log(privateKey);
-
-        const provider = new ethers.JsonRpcProvider("https://testnet-rpc1.autheo.com/")
-
-        const validatorWallet = new ethers.Wallet(privateKey, provider);
-
-        const recipient = "0xAeBbcbee2736786Af9Fc47A7cCC5CC3BF2caD673"; // Replace with the recipient's address
-        const amount = ethers.parseEther("1.0"); // Amount to send (1 token in this example)
-        const tx = await validatorWallet.sendTransaction({
-        to: recipient,
-        value: amount,
-        });
-
-        // const tx = {
-        //     to: contractAddress,
-        //     data: contract.interface.encodeFunctionData("functionName", [args]),
-        //     gasLimit: ethers.utils.hexlify(100000), // Example gas limit
-        //   };
-        //   const transaction = await signer.sendTransaction(tx);
-        //   await transaction.wait();
-
-        const receipt = await tx.wait(); // Wait for transaction confirmation
-        console.log(`Transaction Hash: ${tx.hash}`);
-        // console.log(`Transaction Confirmed: ${receipt.transactionHash}`);
-        } catch (error) {
-        console.error(`Error in native transfer: ${error}`);
-        } 
-    }
     
 
     public async whitelistAddresses() {
@@ -296,8 +248,7 @@ class WhitelistManager {
 async function main() {
     const configPath = path.join(__dirname, 'whitelistedAddress.json');
     const whitelistManager = new WhitelistManager(configPath);
-    // await whitelistManager.transferNative();
-    // await whitelistManager.whitelistAddresses();
+    await whitelistManager.whitelistAddresses();
     await whitelistManager.claim();
 }
 
